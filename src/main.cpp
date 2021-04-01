@@ -42,25 +42,25 @@ Napi::Value Read(const Napi::CallbackInfo& info) {
         shapes_it != shapes.end();
         ++shapes_it) {
         json shape;
-        shape["name"] = (*shapes_it) -> GetName();
+        shape["name"] = (*shapes_it) -> name.get();
         shape["index"] = nif.GetBlockID(*shapes_it);
 
         nifly::NiShader* shader = nif.GetShader(*shapes_it);
         if (shader) {
-            shape["material"] = shader -> GetName();
+            shape["material"] = shader -> name.get();
             shape["wetMaterial"] = shader -> GetWetMaterialName();
 
-            int texture_set_ref = shader -> GetTextureSetRef();
-            if (texture_set_ref > -1) {
+            nifly::NiBlockRef<nifly::BSShaderTextureSet>* texture_set_ref = shader -> TextureSetRef();
+            if (texture_set_ref) {
                 nifly::BSShaderTextureSet* textureSet =
                     hdr.GetBlock<nifly::BSShaderTextureSet>(texture_set_ref);
 
                 int i = 0;
                 json textures_json;
-                for (std::vector<nifly::NiString>::iterator jt = textureSet -> textures.begin();
-                    jt != textureSet -> textures.end();
+                for (std::vector<nifly::NiString>::iterator jt = textureSet -> textures.vec.begin();
+                    jt != textureSet -> textures.vec.end();
                     ++jt) {
-                        textures_json[std::to_string(i++)] = jt -> GetString();
+                        textures_json[std::to_string(i++)] = jt -> get();
                 }
 
                 shape["textures"] = textures_json;

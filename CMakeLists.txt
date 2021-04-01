@@ -20,7 +20,7 @@ endif()
 FetchContent_Declare(
     nifly
     GIT_REPOSITORY https://github.com/ousnius/nifly.git
-    GIT_TAG main
+    GIT_TAG d4b21a88782b5f961e5feb17164b176e6b2af4f1
 )
 FetchContent_GetProperties(nifly)
 if (NOT nifly_POPULATED)
