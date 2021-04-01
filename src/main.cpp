@@ -47,8 +47,10 @@ Napi::Value Read(const Napi::CallbackInfo& info) {
 
         nifly::NiShader* shader = nif.GetShader(*shapes_it);
         if (shader) {
-            int texture_set_ref = shader -> GetTextureSetRef();
+            shape["material"] = shader -> GetName();
+            shape["wetMaterial"] = shader -> GetWetMaterialName();
 
+            int texture_set_ref = shader -> GetTextureSetRef();
             if (texture_set_ref > -1) {
                 nifly::BSShaderTextureSet* textureSet =
                     hdr.GetBlock<nifly::BSShaderTextureSet>(texture_set_ref);

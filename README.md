@@ -1,13 +1,20 @@
 # Nif Textures Reader
 
-A Node addon for fetching the index, name and texture paths for each shape in a NIF file
-(Gamebryo/NetImmerse File Format).
+A Node addon for fetching the index, name, texture paths, material path and wet
+material path from each shape in a NIF file (Gamebryo/NetImmerse File Format).
 
 ## Installation
-Installation using npm:
 
+[Node-addon-api](https://github.com/nodejs/node-addon-api) and
+[CMake.js](https://github.com/cmake-js/cmake-js) are required for compiling. If
+they aren't already present, install them:
 ```
-npm install https://github.com/pappnu/nif-textures-reader.git
+npm install --save-dev node-addon-api cmake-js
+```
+
+Install this package with:
+```
+npm install pappnu/nif-textures-reader
 ```
 
 ## Usage
